@@ -19,8 +19,6 @@ contract Registration{
     }   
 }
 
-//import "@openzeppelin/contracts/utils/Counters.sol";
-
 /*
     ID assignment: 
     1 - For exporter and Importer
