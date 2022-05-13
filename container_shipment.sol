@@ -136,7 +136,6 @@ contract ShipmentContainer {
     }
 
     // ################# getter function for container ID!!!!!!!!!!!!!!
-
     function readContainerState(uint256 containerID) public view returns(ContainerState){
         return containers[containerID].cState;
     }
