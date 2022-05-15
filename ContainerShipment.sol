@@ -1,24 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
-contract Registration{
-
-    //participating stakeholders
-    struct Stakeholder{
-        //string stakeholderRole;      
-        uint256 ID;
-    }
-    mapping(address => Stakeholder) stakeholders;
-
-    event StakeholderRegistered(string info);
-   
-    function register( address roleAddress, uint256 roleID) public{
-        //stakeholders[roleAddress].stakeholderRole = role;
-        stakeholders[roleAddress].ID = roleID;
-        emit StakeholderRegistered("Stakeholder registered.");
-    }   
-}
-
 /*
     ID assignment: 
     1 - For exporter and Importer
@@ -84,6 +66,13 @@ contract ContainerShipment {
     //mapping(uint256 => Container) containers;
     Containers container;
 
+    //participating stakeholders
+    struct Stakeholder{
+        string stakeholderRole;      
+        uint256 ID;
+    }
+    mapping(address => Stakeholder) stakeholders;
+    
     //Tracking events
     event ShipmentRequested(address addr);
     event StakeholderRegistered(string str, string info);
@@ -105,7 +94,7 @@ contract ContainerShipment {
     event TranshipmentPermitIssued(string str);
     event ShipmentReachedDestinationSuccessfully();
     event ErrorBroadcast(string str);
-    
+    event StakeholderRegistered(string info);
     
     //modifiers
     modifier onlyExporter {  //what if any of the others want to be exporters
@@ -135,6 +124,12 @@ contract ContainerShipment {
                                 msg.sender == freightfrw); // Air Carriers
         _;
     }
+    
+    function register(address roleAddress, uint256 roleID) public{
+        stakeholders[roleAddress].stakeholderRole = role;
+        stakeholders[roleAddress].ID = roleID;
+        emit StakeholderRegistered("Stakeholder registered.");
+    } 
     
     // ################# getter function for container ID!!!!!!!!!!!!!!
     function readContainerState() public view returns(ContainerState){
