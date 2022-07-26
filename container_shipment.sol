@@ -135,20 +135,18 @@ contract ShipmentContainer {
         _;
     }
 
-    // ################# getter function for container ID!!!!!!!!!!!!!!
     function readContainerState(uint256 containerID) public view returns(ContainerState){
         return containers[containerID].cState;
     }
 
-    // This will probably be a separate sc, and will have to check lisence ??????
-    //register the participating stakeholders, only the freight forwarder can.
+    //register the participating stakeholders
     function register(string memory role, address roleAddress, uint256 roleID) public onlyFreightFrw{
         stakeholders[roleAddress].stakeholderRole = bytes32(bytes(role));
         stakeholders[roleAddress].ID = roleID;
         emit StakeholderRegistered(role, " registered.");
     }
     
-    // Placing the shipment order by the exporter only    
+    // Placing the shipment order 
     function requestShipment(string memory c_origin, string memory c_destination, string memory c_size, 
     string memory c_content, address receiverAddr) public onlyExporter {    
         ID_counter = counter.current();
@@ -196,7 +194,7 @@ contract ShipmentContainer {
         //emit RequiredDocumentsVerified("Required documents", str, " verified by: ", msg.sender); how about this ?
     }
 
-    //unimodal shipment
+    // unimodal shipment
     function createUnimodalShipment(uint256 containerID, uint256 HaulTruck) public onlyFreightFrw {
 
         require(containers[containerID].cState == ContainerState.Ready, "Documents not verified!");
@@ -246,8 +244,7 @@ contract ShipmentContainer {
     }
     
     // The issuer of a document stores the document in ipfs with its hash link stored in blockchain 
-    function setIPFSLink(uint256 containerID, string memory documentName, string memory hashLink) public{
-        //######################## check the link 
+    function setIPFSLink(uint256 containerID, string memory documentName, string memory hashLink) public{ 
         containers[containerID].IPFShash[bytes32(bytes(documentName))] = hashLink;       
     }
     function getIPFSLink(uint256 containerID, string memory documentName) public view returns (string memory){
@@ -383,4 +380,4 @@ contract ShipmentContainer {
 // truck, 0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB, 3
 // sea, 0x617F2E2fD72FD9D5503197092aC168c91465E7f2, 4
 // agent, 0x17F6AD8Ef982297579C203069C1DbfFE4348c372, 6
-//hash QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB
+//ipfs link hash QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB
