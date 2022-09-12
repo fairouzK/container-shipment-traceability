@@ -48,7 +48,6 @@ contract ContainerShipment {
         //uint256 railC;
     }
 
-    //mapping(bytes32 => bytes32) IPFShash;
 
     struct Containers{
         //uint256 ID;
