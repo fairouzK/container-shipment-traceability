@@ -1,6 +1,5 @@
 # container-shipment-traceability
-Published paper: Blockchain-based Traceability for Shipping Containers in Unimodal and Multimodal Logistics
-
+Published paper: Blockchain-based Traceability for Shipping Containers in Unimodal and Multimodal Logistics <br>
 IEEE link: https://ieeexplore.ieee.org/abstract/document/9997538
 
 ### Abstract
